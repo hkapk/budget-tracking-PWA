@@ -34,7 +34,7 @@ function saveRecord(record) {
     const transaction = db.transaction(['new_transaction'], 'readwrite');
   
     // access the object store for `new_transaction`
-    const budgetObjectStore = transaction.objectStore('transaction_pizza');
+    const budgetObjectStore = transaction.objectStore('new_transaction');
   
     // add record to your store with add method
     budgetObjectStore.add(record);
@@ -54,7 +54,7 @@ function saveRecord(record) {
 getAll.onsuccess = function() {
     // if there was data in indexedDb's store, let's send it to the api server
     if (getAll.result.length > 0) {
-      fetch('/api/transaction', {
+      fetch('/api/transaction/bulk', {
         method: 'POST',
         body: JSON.stringify(getAll.result),
         headers: {
